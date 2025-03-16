@@ -1,0 +1,9 @@
+Thumbs.db
+
+Python
+=======
+*.pyc
+
+Specific folders
+===============
+unit_cell_data/
