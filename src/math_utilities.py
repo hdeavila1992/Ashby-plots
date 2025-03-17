@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Math utilities to clean up organization. 
+Math utilities to clean up organization.
 
 @author: Walgren
 """
@@ -26,5 +26,4 @@ def logarithmic_mean(x):
     '''
     if np.mean(x) == np.array(x).all():
         return x
-    else:
-        return (x[1] - x[0])/(np.log(x[1]) - np.log(x[0]))
+    return (x[1] - x[0])/(np.log(x[1]) - np.log(x[0]))

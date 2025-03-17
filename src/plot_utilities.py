@@ -4,15 +4,15 @@ Plot utilities script.
 Contains all the misc. functions to generate the ashby plot (not related to the actual ellipses).
 
 
-@author: pwal5
+@author: Walgren
 """
+import os
+
 import numpy as np
 
-import os 
-
 import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-import matplotlib.colors as colors
+from matplotlib import patches
+from matplotlib import colors
 
 from src.plot_convex_hull import (
     draw_ellipses,
@@ -41,7 +41,7 @@ def plotting_presets(figure_type:str = 'publication'):
     '''
     #Graphs in a separate window (run in Spyder)
     if 'SPY_PYTHONPATH' in os.environ:
-        # see: https://stackoverflow.com/questions/32538758/nameerror-name-get-ipython-is-not-defined
+        # see https://stackoverflow.com/questions/32538758/nameerror-name-get-ipython-is-not-defined
         # running inside spyder!
         #Graphs in a separate window
         from IPython import get_ipython
@@ -70,8 +70,6 @@ def plotting_presets(figure_type:str = 'publication'):
     plt.rcParams['svg.fonttype'] = 'none'
     #Modify marker size to make them readable
     plt.rcParams['lines.markersize'] = 10
-
-    return
 
 
 def draw_plot(
@@ -122,8 +120,10 @@ def draw_plot(
 
             for i in range(len(material_data)):
                 draw_ellipses(
-                        x = [material_data[x_axis_quantity + ' low'].iloc[i], material_data[x_axis_quantity + ' high'].iloc[i]],
-                        y = [material_data[y_axis_quantity + ' low'].iloc[i], material_data[y_axis_quantity + ' high'].iloc[i]],
+                        x = [material_data[x_axis_quantity + ' low'].iloc[i],
+                             material_data[x_axis_quantity + ' high'].iloc[i]],
+                        y = [material_data[y_axis_quantity + ' low'].iloc[i],
+                             material_data[y_axis_quantity + ' high'].iloc[i]],
                         plot_kwargs = {
                             'facecolor':colors.to_rgba(
                                 material_colors[category],
@@ -207,7 +207,7 @@ def create_legend(
         mode = 'expand',
         borderaxespad = 0,
         ncol = 4)
-    
+
 def draw_guideline(
         guideline,
         ax,
@@ -231,7 +231,7 @@ def draw_guideline(
         string : string to display and label the guideline
         string_position : location to start the string
     ax : matplotlib axis object
-        The current plotting axis. 
+        The current plotting axis.
     log_flag : bool
         Flag to determine whether the logarithmic equation for a line
         will be used or a standard equation.
@@ -255,12 +255,12 @@ def draw_guideline(
 
     #Create the line
     for i in range(len(x_values)):
-        if log_flag == True:
+        if log_flag:
             y_values[i] = y_intercept*x_values[i]**power
         else:
             y_values[i] = power*x_values[i] + y_intercept
 
-    line, = ax.plot(
+    ax.plot(
         x_values,
         y_values,
         'k--',
@@ -280,7 +280,7 @@ def draw_guideline(
         textcoords="offset points",
         va="top"
         )
-    
+
 
 def common_definitions():
     '''

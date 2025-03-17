@@ -1,9 +1,9 @@
 '''
 This script will plot various material properties in an 'Ashby-type' way (
-i.e., convex hulls surrounding points of certain classes). 
+i.e., convex hulls surrounding points of certain classes).
 
-Input file format: one excel file, with either material property ranges or 
-single values defined. 
+Input file format: one excel file, with either material property ranges or
+single values defined.
 
 Dependencies:
     files: plot_convex_hull.py
@@ -29,7 +29,7 @@ from src.plot_utilities import (
     create_legend,
     draw_plot,
     plotting_presets,
-    draw_guideline, 
+    draw_guideline,
     common_definitions,
     )
 
@@ -37,19 +37,17 @@ from src.plot_utilities import (
 if __name__ == '__main__':
     #%% USER INPUTS (everything you will need to change *should* be here)
     # FIXME To-do:
-    '''
         # Error handling/format checking for:
         #   file type
         # Create inputs for:
             # guideline power (figure out what to call that)
             # guideline x_limits and y_intercept
             # guideline string
-    '''
 
 
     # file with all of your material data (must be xlsx)
     file_name = 'common_material_properties.xlsx'
-    
+
     # quantities you would like to plot
     x_axis_quantity = 'Density'
     y_axis_quantity = "Young Modulus"
@@ -71,33 +69,35 @@ if __name__ == '__main__':
     # Guideline setup
     guideline_flag = True
 
-    if guideline_flag == True:
+    if guideline_flag:
         guideline = {
             'power':1, #power to plot the guideline on (e.g., 1/3, 1)
             'x_lim':[1E1, 1E5], #x-limits of the guideline (not necessarily the figure x limits)
             'string':r"$\frac{E}{\rho} \equiv k$", #string to display
             # 'string':r"$\frac{1}{(1+\nu)\rho} \equiv k$",
-            'y_intercept': 1E-5, #y-intercept of the guideline, 0.001 for poisson, 1E-10 for stiffness
-            'string_position': (65, 5E-4) , #location of the annotation, (300,0.51) for poisson, (65, 2E-4) for stiffness
+            #y-intercept of the guideline, 0.001 for poisson, 1E-10 for stiffness
+            'y_intercept': 1E-5,
+            #location of the annotation, (300,0.51) for poisson, (65, 2E-4) for stiffness
+            'string_position': (65, 5E-4) ,
             }
-        
-    # Flag to plot individual materials as stars. 
+
+    # Flag to plot individual materials as stars.
     individual_material_flag = False
-    if individual_material_flag == True: 
+    if individual_material_flag:
         foam = {
             'E':0.124E-3,
             'nu':0.45,
             'rho':400,
             }
-        
+
         PLA = {
             'E':2.009,
             'nu':0.3,
             'rho':1300,
             }
-        
+
         marker_size = 500
-    
+
 
 
     #%% General setup
@@ -113,7 +113,7 @@ if __name__ == '__main__':
         'material_properties',
         file_name,
         )
-    
+
     data = pd.read_excel(
         file_path
         )
@@ -134,7 +134,7 @@ a color. Please add a color to the material_colors dictionary (common_definition
             y_label = r'Hyperbolic Poisson Ratio $\frac{1}{1+\nu}$, '+ units[y_axis_quantity]
         else:
             y_label = y_axis_quantity + ', ' + units[y_axis_quantity]
-            
+
         if x_axis_quantity == 'Poisson difference':
             x_label = r'Hyperbolic Poisson Ratio $\frac{1}{1+\nu}$, '+ units[x_axis_quantity]
         else:
@@ -152,7 +152,7 @@ have equivalent key-value pairs in the units dictionary (common_definitions func
     ax.set(xlim=x_lim, ylim= y_lim)
 
     #toggle log-log plot
-    if log_flag == True:
+    if log_flag:
         ax.loglog()
 
     # set x-scale to logarithmic
@@ -167,7 +167,7 @@ have equivalent key-value pairs in the units dictionary (common_definitions func
         zorder = 0.5)
 
     #%% Data plotting
-    if guideline_flag == True:
+    if guideline_flag:
         #draw guideline
         draw_guideline(
                 guideline,
@@ -193,9 +193,9 @@ have equivalent key-value pairs in the units dictionary (common_definitions func
             material_classes = data.groupby('Category').groups.keys(),
             material_colors = material_colors,
             )
-      
+
     # plot discrete materials
-    if individual_material_flag == True:
+    if individual_material_flag:
         ax.scatter(
             foam['rho'],
             # foam['E'],
@@ -205,7 +205,7 @@ have equivalent key-value pairs in the units dictionary (common_definitions func
             marker = '*',
             s = marker_size,
             )
-        
+
         ax.scatter(
             PLA['rho'],
             # PLA['E'],
