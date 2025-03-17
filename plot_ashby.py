@@ -46,13 +46,10 @@ if __name__ == '__main__':
             # guideline string
     '''
 
+
     # file with all of your material data (must be xlsx)
-    file_name = os.path.join(
-        os.getcwd(),
-    'material_properties',
-    'common_material_properties.xlsx',
-    )
     
+    file_name = 'common_material_properties.xlsx'
 
     data_type = 'ranges' # type of material data ('ranges' or single 'values')
 
@@ -86,6 +83,24 @@ if __name__ == '__main__':
             'y_intercept': 0.001, #y-intercept of the guideline, 0.001 for poisson, 1E-10 for stiffness
             'string_position': (300,0.51) , #location of the annotation, (300,0.51) for poisson, (65, 2E-4) for stiffness
             }
+        
+    # Flag to plot individual materials as stars. 
+    individual_material_flag = False
+    if individual_material_flag == True: 
+        foam = {
+            'E':0.124E-3,
+            'nu':0.45,
+            'rho':400,
+            }
+        
+        PLA = {
+            'E':2.009,
+            'nu':0.3,
+            'rho':1300,
+            }
+        
+        marker_size = 500
+    
 
 
     #%% General setup
@@ -96,8 +111,14 @@ if __name__ == '__main__':
     plotting_presets(figure_type)
 
     #load data
+    file_path = os.path.join(
+        os.getcwd(),
+        'material_properties',
+        file_name,
+        )
+    
     data = pd.read_excel(
-        file_name
+        file_path
         )
 
     # Error handling about the colors dictionary
@@ -175,44 +196,25 @@ have equivalent key-value pairs in the units dictionary (common_definitions func
             material_classes = data.groupby('Category').groups.keys(),
             material_colors = material_colors,
             )
-    
-    
-    # plot discrete materials 
-    marker_size = 500
-    
-    foam = {
-        'E':0.124E-3,
-        'nu':0.45,
-        'rho':400,
-        }
-    
-    PLA = {
-        'E':2.009,
-        'nu':0.3,
-        'rho':1300,
-        }
-    
-    # ax.scatter(
-    #     foam['rho'],
-    #     # foam['E'],
-    #     1/(1+foam['nu']),
-    #     c = 'b',
-    #     edgecolors ='k',
-    #     marker = '*',
-    #     s = marker_size,
-    #     )
-    
-    # ax.scatter(
-    #     PLA['rho'],
-    #     # PLA['E'],
-    #     1/(1+PLA['nu']),
-    #     c = 'r',
-    #     edgecolors ='k',
-    #     marker = '*',
-    #     s = marker_size,
-    #     )
-    
-    
-    
-
-    
+      
+    # plot discrete materials
+    if individual_material_flag == True:
+        ax.scatter(
+            foam['rho'],
+            # foam['E'],
+            1/(1+foam['nu']),
+            c = 'b',
+            edgecolors ='k',
+            marker = '*',
+            s = marker_size,
+            )
+        
+        ax.scatter(
+            PLA['rho'],
+            # PLA['E'],
+            1/(1+PLA['nu']),
+            c = 'r',
+            edgecolors ='k',
+            marker = '*',
+            s = marker_size,
+            )

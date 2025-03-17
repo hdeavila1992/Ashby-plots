@@ -193,7 +193,6 @@ def create_legend(
     handles = []
     # make a manual legend
     for material_class in material_classes:
-        print(material_class)
         patch = patches.Patch(
             color = material_colors[material_class],
             label = material_class
