@@ -71,14 +71,14 @@ if __name__ == '__main__':
 
     if guideline_flag:
         guideline = {
-            'power':1, #power to plot the guideline on (e.g., 1/3, 1)
+            'power':2, #power to plot the guideline on (e.g., 1/3, 1)
             'x_lim':[1E1, 1E5], #x-limits of the guideline (not necessarily the figure x limits)
-            'string':r"$\frac{E}{\rho} \equiv k$", #string to display
+            'string':r"$\frac{E^{1/2}}{\rho} \equiv k$", #string to display
             # 'string':r"$\frac{1}{(1+\nu)\rho} \equiv k$",
             #y-intercept of the guideline, 0.001 for poisson, 1E-10 for stiffness
-            'y_intercept': 1E-5,
+            'y_intercept': 1E-4,
             #location of the annotation, (300,0.51) for poisson, (65, 2E-4) for stiffness
-            'string_position': (65, 5E-4) ,
+            'string_position': (65, 3) ,
             }
 
     # Flag to plot individual materials as stars.
