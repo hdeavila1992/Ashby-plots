@@ -84,17 +84,21 @@ if __name__ == '__main__':
     # Flag to plot individual materials as stars.
     individual_material_flag = False
     if individual_material_flag:
-        foam = {
-            'E':0.124E-3,
-            'nu':0.45,
-            'rho':400,
+        individual_materials = [{
+            'Young Modulus':0.124E-3,
+            'Poisson':0.45,
+            'Density':400,
+            'name':'Foam',
+            'color':'b'
+            },
+            {
+            'Young Modulus':2.009,
+            'Poisson':0.3,
+            'Density':1300,
+            'name':'PLA',
+            'color':'r',
             }
-
-        PLA = {
-            'E':2.009,
-            'nu':0.3,
-            'rho':1300,
-            }
+        ]
 
         marker_size = 500
 
@@ -196,22 +200,13 @@ have equivalent key-value pairs in the units dictionary (common_definitions func
 
     # plot discrete materials
     if individual_material_flag:
-        ax.scatter(
-            foam['rho'],
-            # foam['E'],
-            1/(1+foam['nu']),
-            c = 'b',
-            edgecolors ='k',
-            marker = '*',
-            s = marker_size,
-            )
+        for individual_material in individual_materials:
 
-        ax.scatter(
-            PLA['rho'],
-            # PLA['E'],
-            1/(1+PLA['nu']),
-            c = 'r',
-            edgecolors ='k',
-            marker = '*',
-            s = marker_size,
-            )
+            ax.scatter(
+                individual_material[x_axis_quantity],
+                individual_material[y_axis_quantity],
+                c = individual_material['color'],
+                edgecolors ='k',
+                marker = '*',
+                s = marker_size,
+                )
