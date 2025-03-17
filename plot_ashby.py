@@ -48,25 +48,22 @@ if __name__ == '__main__':
 
 
     # file with all of your material data (must be xlsx)
-    
     file_name = 'common_material_properties.xlsx'
+    
+    # quantities you would like to plot
+    x_axis_quantity = 'Density'
+    y_axis_quantity = "Young Modulus"
 
     data_type = 'ranges' # type of material data ('ranges' or single 'values')
 
     figure_type = 'presentation' #options are 'publication' or 'presentation'
     figure_size = (9,7) #width, height, in inches
 
-    # quantities you would like to plot
-    x_axis_quantity = 'Density'
-    # x_axis_quantity = 'Density'
-    # y_axis_quantity = "Young Modulus"
-    y_axis_quantity = "Poisson difference"
-
     # x- and y-axes limits
     # x_lim = [1E-4,1E3]
     x_lim = [10, 30000] #min, max
-    y_lim = [0.5,1.1] #min, max
-    # y_lim = [1E-4,1E3]
+    # y_lim = [0.5,1.1] #min, max
+    y_lim = [1E-4,1E3]
 
     #Flag to plot in log-log space
     log_flag = True
@@ -78,10 +75,10 @@ if __name__ == '__main__':
         guideline = {
             'power':1, #power to plot the guideline on (e.g., 1/3, 1)
             'x_lim':[1E1, 1E5], #x-limits of the guideline (not necessarily the figure x limits)
-            # 'string':r"$\frac{E^{1/3}}{\rho} \equiv k$", #string to display
-            'string':r"$\frac{1}{(1+\nu)\rho} \equiv k$",
-            'y_intercept': 0.001, #y-intercept of the guideline, 0.001 for poisson, 1E-10 for stiffness
-            'string_position': (300,0.51) , #location of the annotation, (300,0.51) for poisson, (65, 2E-4) for stiffness
+            'string':r"$\frac{E}{\rho} \equiv k$", #string to display
+            # 'string':r"$\frac{1}{(1+\nu)\rho} \equiv k$",
+            'y_intercept': 1E-5, #y-intercept of the guideline, 0.001 for poisson, 1E-10 for stiffness
+            'string_position': (65, 5E-4) , #location of the annotation, (300,0.51) for poisson, (65, 2E-4) for stiffness
             }
         
     # Flag to plot individual materials as stars. 
