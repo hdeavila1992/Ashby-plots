@@ -2,7 +2,7 @@
 """
 Created on Fri Apr 12 16:49:38 2024
 
-@author: 1545585665157005
+@author: Walgren
 """
 import sklearn.preprocessing
 import sklearn.pipeline

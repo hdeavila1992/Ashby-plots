@@ -1,4 +1,4 @@
-# Ashby Plotting
+# Ashby plots in python
  Simple script to generate Ashby plots based on generic material property data. This package allows
  * creation of custom guidelines to define material indices (e.g., $\frac{E^{1/2}}{\rho}$),
  * plotting of discrete points (e.g., highlighting where Aluminum falls on a stiffness-density plot),
@@ -32,6 +32,17 @@ Here is a complete list of dependencies:
 * Launch the script by running `plot_ashby.py` and generate your figure!
 
 It is expected that the precise formatting will take some iteration, but hopefully you find this useful.
+
+## Methods
+This package is a collection of a few different functions found on StackOverflow and GitHub:
+
+1. The sample material data is a modified version of [nicogauro's `material_database` repository](https://github.com/nicoguaro/material_database).
+2. Each material "family" is enclosed via a convex hull. This code is heavily inspired by [Pablo's answer on StackOverflow to a similar question](https://stackoverflow.com/a/17557853/991496).
+
+## Enhancements
+The code is currently in beta, so further development will focus on making it more user friendly as well as adding the possibility to contextualize your own material data with common material data. 
+If you have any ideas for needed enhancements or quality-of-life improvements, please open an issue. 
+
 
 
  ## License
